@@ -3,27 +3,40 @@ import logging
 import sys
 import requests
 
+LIMIT_OF_TRIES = 3
+OK_STATUS = 200
+TIME_OUT_VALUE = 3
+
+DOMAIN_ALIVE = 0
+DOMAIN_DEAD = 1
+DOMAIN_CHECK_FAILED = 2
 logger = logging.getLogger(__name__)
 logger.addHandler(logging.StreamHandler(sys.stderr))
 logger.setLevel(logging.DEBUG)
 
-r = {}
 
 def check_domains_alive(*domains):
-    for i in domains:
-        r[i] = False
-        for j in range(3):
+    results = {}
+    for domain in domains:
+        results[domain] = DOMAIN_DEAD
+        for each_try in range(LIMIT_OF_TRIES):
             try:
-                res = requests.get("https://%s" % i, timeout=3)
-                logger.debug("Checked %s, result %s" % (i, res))
+                result = requests.get("https://%s" % domain, timeout=TIME_OUT_VALUE)
+                logger.debug("Checked %s, result %s" % (domain, result))
             
-                if res.status_code == 200:
-                    r[i] = True
+                print(result.headers)
+                if result.status_code == OK_STATUS:
+                    results[domain] = DOMAIN_ALIVE
                     break
             except BaseException as exc:
-                logger.debug("Checked %s, exception %s" % (i, exc))
+                logger.debug("Checked %s, exception %s" % (domain, exc))
+                results[domain] = DOMAIN_CHECK_FAILED
                 continue
 
-    return r
+    return results
 
-print(json.dumps(check_domains_alive(*sys.argv[1:]), indent=4))
+# print(json.dumps(check_domains_alive(*sys.argv[1:]), indent=4))
+
+res1 = check_domains_alive('google.com')
+res2 = check_domains_alive('biblehub.com')
+print(res2)
