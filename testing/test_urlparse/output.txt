@@ -1,0 +1,8 @@
+https://www.google.com/ ParseResult(scheme='https', netloc='www.google.com', path='/', params='', query='', fragment='')
+https://www.biblehub.com/ ParseResult(scheme='https', netloc='www.biblehub.com', path='/', params='', query='', fragment='')
+http://www.stackoverflow.com ParseResult(scheme='http', netloc='www.stackoverflow.com', path='', params='', query='', fragment='')
+https://www.example.com/ ParseResult(scheme='https', netloc='www.example.com', path='/', params='', query='', fragment='')
+https://123.12.34.56:1234 ParseResult(scheme='https', netloc='123.12.34.56:1234', path='', params='', query='', fragment='')
+http://10.0.0.1 ParseResult(scheme='http', netloc='10.0.0.1', path='', params='', query='', fragment='')
+not a valid url ParseResult(scheme='', netloc='', path='not a valid url', params='', query='', fragment='')
+http://google ParseResult(scheme='http', netloc='google', path='', params='', query='', fragment='')
