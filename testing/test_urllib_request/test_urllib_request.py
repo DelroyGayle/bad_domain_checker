@@ -27,7 +27,7 @@ for url in urls:
         print('Not a valid url.')
         print('Reason: ', e)
         continue
-    else: 
+    else:
         try:
             response = urlopen(request, timeout=3)
         except HTTPError as e:
@@ -44,4 +44,4 @@ for url in urls:
             print('Reason: ', e)
         else:
             print('Regarding', url)
-            print ('Website is working fine')
+            print('Website is working fine')
