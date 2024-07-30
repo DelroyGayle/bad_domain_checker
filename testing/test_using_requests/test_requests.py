@@ -16,9 +16,10 @@ urls = [
     'https://www.python.org/',
     'https://api.github.com',
     'http://localhost:8080',
-    'http://google.fr'
+    'http://google.fr',
     'http://notexist.kc',
     # INVALID FORMED URLS
+    'http://google.frhttp://notexist.kc',
     'not a valid url',
     'http://google',
     'www.python.org',
@@ -28,27 +29,24 @@ urls = [
 
 for url in urls:
     try:
-        request = Request(url)
+        response = requests.head(url, timeout = 0.5, allow_redirects=True)
+    except requests.exceptions.Timeout:
+        print('Regarding', url)
+        print('Timed out.\n')
+    except requests.exceptions.ConnectionError:
+        print('Regarding', url)
+        print('The server could not connect with this url.\n')
+    except requests.exceptions.MissingSchema:
+        print('Regarding', url)
+        print('Badly formed url - There is no Schema.\n')
+    except URLError as e:
+        print('Regarding', url)
+        print('We failed to reach a serverx.\n')
+        print('Reason: ', e.reason)
     except ValueError as e:
         print('Regarding', url)
         print('Not a valid url.')
-        print('Reason: ', e)
-        continue
+        print('Reason:\n ', e)
     else:
-        try:
-            response = urlopen(request, timeout=3)
-        except HTTPError as e:
-            print('Regarding', url)
-            print('The server couldn\'t fulfill the request.')
-            print('Error code: ', e.code)
-        except URLError as e:
-            print('Regarding', url)
-            print('We failed to reach a server.')
-            print('Reason: ', e.reason)
-        except ValueError as e:
-            print('Regarding', url)
-            print('Not a valid url.')
-            print('Reason: ', e)
-        else:
-            print('Regarding', url)
-            print('Website is working fine')
+        print('Regarding', url)
+        print('Website is working fine.\n')
