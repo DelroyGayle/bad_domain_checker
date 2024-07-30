@@ -1,9 +1,12 @@
-When testing 'www.python.org' using <br>
+Note: When testing 'www.python.org' using <br>
 ```response = requests.head(url, timeout = 0.5, allow_redirects=True)```
+<br>I received the following error message:<br>
 
+```
  requests.exceptions.MissingSchema: 
     Invalid URL 'www.python.org': No scheme supplied. 
     Perhaps you meant https://www.python.org?
+```
 
 # The test
 I updated the exceptions according and tested the following urls:
