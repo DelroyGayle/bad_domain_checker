@@ -1,9 +1,8 @@
 """
-Test URL validation using urllib.request
+Test URL validation using requests
 """
 
-from urllib.request import Request, urlopen
-from urllib.error import URLError, HTTPError
+import requests
 
 urls = [
     # VALID FORMED URLS
@@ -17,11 +16,14 @@ urls = [
     'https://www.python.org/',
     'https://api.github.com',
     'http://localhost:8080',
+    'http://google.fr'
+    'http://notexist.kc',
     # INVALID FORMED URLS
     'not a valid url',
     'http://google',
     'www.python.org',
-    'http://foo.example.org/'
+    'http://foo.example.org/',
+    ''
 ]
 
 for url in urls:
