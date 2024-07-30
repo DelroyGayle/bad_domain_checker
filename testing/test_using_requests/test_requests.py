@@ -39,14 +39,6 @@ for url in urls:
     except requests.exceptions.MissingSchema:
         print('Regarding', url)
         print('Badly formed url - There is no Schema.\n')
-    except URLError as e:
-        print('Regarding', url)
-        print('We failed to reach a serverx.\n')
-        print('Reason: ', e.reason)
-    except ValueError as e:
-        print('Regarding', url)
-        print('Not a valid url.')
-        print('Reason:\n ', e)
     else:
         print('Regarding', url)
         print('Website is working fine.\n')
